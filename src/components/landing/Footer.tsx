@@ -12,27 +12,27 @@ export function Footer() {
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-primary text-primary-foreground">
               <Dumbbell className="h-4 w-4" />
             </span>
-            PulseAI
+            FitAura
           </div>
           <p className="mt-3 text-sm text-muted-foreground max-w-xs">
             Your personal AI fitness coach. Workouts, meals, and form — all adapted to you.
           </p>
         </div>
         <div className="grid grid-cols-2 gap-6 text-sm">
-          {/* <div>
-            <div className="font-semibold mb-3">Company</div>
-            <ul className="space-y-2 text-muted-foreground">
-              <li><Link href="#" className="hover:text-foreground">Contact</Link></li>
-              <li><Link href="#" className="hover:text-foreground">Privacy Policy</Link></li>
-              <li><Link href="#" className="hover:text-foreground">Terms</Link></li>
-            </ul>
-          </div> */}
           <div>
             <div className="font-semibold mb-3">Product</div>
             <ul className="space-y-2 text-muted-foreground">
               <li><Link href="#features" className="hover:text-foreground">Features</Link></li>
               <li><Link href="#pricing" className="hover:text-foreground">Pricing</Link></li>
               <li><Link href="#feedback" className="hover:text-foreground">Beta program</Link></li>
+            </ul>
+          </div>
+          <div>
+            <div className="font-semibold mb-3">Company</div>
+            <ul className="space-y-2 text-muted-foreground">
+              <li><Link href="#waitlist" className="hover:text-foreground">Contact</Link></li>
+              <li><Link href="#" className="hover:text-foreground">Privacy Policy</Link></li>
+              <li><Link href="#" className="hover:text-foreground">Terms</Link></li>
             </ul>
           </div>
         </div>
@@ -50,8 +50,8 @@ export function Footer() {
         </div>
       </div>
       <div className="mx-auto max-w-7xl px-6 mt-10 pt-6 border-t border-border text-xs text-muted-foreground flex flex-col md:flex-row justify-between gap-2">
-        <div>© {new Date().getFullYear()} PulseAI. All rights reserved.</div>
-        <div>Built for athletes who want results.</div>
+        <div>© {new Date().getFullYear()} FitAura. All rights reserved.</div>
+        <div>Train smarter. Eat better. Progress faster.</div>
       </div>
     </footer>
   );

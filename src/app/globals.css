@@ -160,8 +160,12 @@
   --font-sans: "Inter", system-ui, sans-serif;
 }
 
+@theme {
+    --breakpoint-xl: 80.01rem;
+}
+
 @layer base {
-  :root {
+  :root {    
     --radius: 0.875rem;
     /* Dark fitness theme — lime green + electric orange accents */
     --background: oklch(0.16 0.015 240);

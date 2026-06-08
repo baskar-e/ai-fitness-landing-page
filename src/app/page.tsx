@@ -23,14 +23,14 @@ export default function Home() {
         <section className="py-12">
           <div className="mx-auto max-w-4xl px-6 text-center">
             <p className="text-sm font-semibold text-primary uppercase tracking-widest">
-              Introducing PulseAI
+              Introducing FitAura
             </p>
             <h2 className="mt-3 text-3xl md:text-4xl font-bold leading-tight">
               An AI-powered fitness companion that{" "}
               <span className="text-gradient-primary">adapts to every user.</span>
             </h2>
             <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-              PulseAI learns your body, your goals, and your schedule — then builds the
+              FitAura learns your body, your goals, and your schedule — then builds the
               workout, nutrition, and recovery plan that actually works for you.
             </p>
           </div>

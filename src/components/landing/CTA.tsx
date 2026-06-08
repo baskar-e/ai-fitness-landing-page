@@ -12,11 +12,15 @@ export function FinalCTA() {
               <span className="text-gradient-primary">future of fitness.</span>
             </h2>
             <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-              Join 2,800+ athletes on the waitlist. Early users get founder pricing for life.
+              Join 2,800+ users on the waitlist. Early users get founder pricing for life.
             </p>
             <div className="mt-8 max-w-md mx-auto">
-              <WaitlistForm source="final_cta" />
+              <WaitlistForm />
             </div>
+            <p className="mt-4 text-xs text-muted-foreground">
+              By joining the waitlist, you agree to receive updates about FitAura.
+              You can unsubscribe at any time.
+            </p>
           </div>
         </div>
       </div>

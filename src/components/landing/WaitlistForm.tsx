@@ -4,7 +4,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Loader2, CheckCircle2 } from "lucide-react";
 
-export function WaitlistForm({ source = "hero" }: { source?: string }) {
+export function WaitlistForm({ source = "waitlist" }: { source?: string }) {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
@@ -21,14 +21,22 @@ export function WaitlistForm({ source = "hero" }: { source?: string }) {
         },
         body: JSON.stringify({ email, source }),
       });
-      const result = (await response.json()) as { error?: string };
+      const result = (await response.json()) as {
+        alreadyJoined?: boolean;
+        error?: string;
+        message?: string;
+      };
 
       if (!response.ok) {
         throw new Error(result.error || "Unable to join the waitlist right now");
       }
 
       setDone(true);
-      toast.success(`You are on the ${source.replace("_", " ")} list. Check your inbox.`);
+      toast.success(
+        result.alreadyJoined
+          ? result.message || "You have already joined the waitlist."
+          : "You are on the waitlist. Check your inbox."
+      );
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Something went wrong");
     } finally {

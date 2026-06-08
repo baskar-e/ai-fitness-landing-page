@@ -21,13 +21,13 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: "PulseAI — Your Personal AI Fitness Coach",
+  title: "FitAura — AI Fitness Coach",
   description: "Get personalized AI workouts, smart meal plans, calorie tracking, and real-time form correction. Join the waitlist for early access.",
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: "PulseAI — Your Personal AI Fitness Coach",
+    title: "FitAura — AI Fitness Coach",
     description: "Personalized workouts, AI meal plans, and real-time pose correction. Join the waitlist.",
     type: "website",
   },
@@ -41,7 +41,7 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "PulseAI",
+    name: "FitAura",
     applicationCategory: "HealthApplication",
     operatingSystem: "iOS, Android",
     description: "AI-powered fitness coach with personalized workouts, meal plans, calorie tracking, and real-time form correction.",

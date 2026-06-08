@@ -23,6 +23,24 @@ export async function POST(request: Request) {
     const supabase = createSupabaseServerClient();
     const table = getOptionalEnv("SUPABASE_FEEDBACK_TABLE", "beta_feedback");
 
+    const { data: existing, error: existingError } = await supabase
+      .from(table)
+      .select("id")
+      .eq("email", email)
+      .maybeSingle<{ id: number }>();
+
+    if (existingError) {
+      return NextResponse.json({ error: existingError.message }, { status: 500 });
+    }
+
+    if (existing) {
+      return NextResponse.json({
+        ok: true,
+        alreadyJoined: true,
+        message: "You have already joined the beta program.",
+      });
+    }
+
     const { error } = await supabase.from(table).insert({
       email,
       fitness_goal: cleanText(payload.fitness_goal),

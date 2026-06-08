@@ -1,7 +1,8 @@
 export type RequiredEnvKey =
   | "SUPABASE_URL"
   | "SUPABASE_SERVICE_ROLE_KEY"
-  | "MAILERLITE_API_KEY";
+  | "MAILERLITE_API_KEY"
+  | "MAILERLITE_WEBHOOK_SECRET";
 
 export function getRequiredEnv(key: RequiredEnvKey) {
   const value = process.env[key];

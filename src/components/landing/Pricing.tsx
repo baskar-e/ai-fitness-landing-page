@@ -43,7 +43,7 @@ export function Pricing() {
             <div
               key={t.name}
               className={
-                "rounded-3xl p-8 border " +
+                "flex flex-col rounded-3xl p-8 border " +
                 (t.highlighted
                   ? "bg-gradient-card border-primary/50 shadow-glow"
                   : "bg-gradient-card border-border")
@@ -62,7 +62,7 @@ export function Pricing() {
                 {t.suffix && <span className="text-muted-foreground">{t.suffix}</span>}
               </div>
               <p className="mt-2 text-sm text-muted-foreground">{t.desc}</p>
-              <ul className="mt-6 space-y-3">
+              <ul className="my-6 space-y-3">
                 {t.features.map((f) => (
                   <li key={f} className="flex items-start gap-3 text-sm">
                     <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
@@ -73,10 +73,10 @@ export function Pricing() {
               <Link
                 href="#waitlist"
                 className={
-                  "mt-8 inline-flex w-full justify-center rounded-xl px-5 py-3 font-semibold transition " +
+                  "mt-auto inline-flex w-full justify-center rounded-xl px-5 py-3 font-semibold transition " +
                   (t.highlighted
                     ? "bg-gradient-primary text-primary-foreground shadow-glow hover:opacity-90"
-                    : "glass hover:border-primary")
+                    : "glass bg-[oklch(0.22_0.018_245/0.9)]! hover:border-primary")
                 }
               >
                 {t.cta}

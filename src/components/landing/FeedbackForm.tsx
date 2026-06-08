@@ -34,14 +34,22 @@ export function FeedbackForm() {
         },
         body: JSON.stringify(form),
       });
-      const result = (await response.json()) as { error?: string };
+      const result = (await response.json()) as {
+        alreadyJoined?: boolean;
+        error?: string;
+        message?: string;
+      };
 
       if (!response.ok) {
         throw new Error(result.error || "Unable to submit feedback right now");
       }
 
       setDone(true);
-      toast.success("Thanks! Your feedback is saved. Check your inbox.");
+      toast.success(
+        result.alreadyJoined
+          ? result.message || "You have already joined the beta program."
+          : "Thanks! Your feedback is saved. Check your inbox."
+      );
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Something went wrong");
     } finally {
@@ -106,6 +114,10 @@ export function FeedbackForm() {
       >
         {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Submit & Become a Beta Tester"}
       </button>
+      <p className="mt-2 text-xs text-muted-foreground text-center">
+  By joining the waitlist, you agree to receive updates about FitAura.
+  You can unsubscribe at any time.
+</p>
     </form>
   );
 }

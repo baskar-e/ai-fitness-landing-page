@@ -19,12 +19,34 @@ export async function POST(request: Request) {
 
     const supabase = createSupabaseServerClient();
     const table = getOptionalEnv("SUPABASE_WAITLIST_TABLE", "waitlist_signups");
-    const source = payload.source || "landing_page";
+    const source = payload.source || "waitlist";
 
-    const { error } = await supabase.from(table).insert({
-      email,
-      source,
-    });
+    const { data: existing, error: existingError } = await supabase
+      .from(table)
+      .select("id")
+      .eq("email", email)
+      .maybeSingle<{ id: number }>();
+
+    if (existingError) {
+      return NextResponse.json({ error: existingError.message }, { status: 500 });
+    }
+
+    if (existing) {
+      return NextResponse.json({
+        ok: true,
+        alreadyJoined: true,
+        message: "You have already joined the waitlist.",
+      });
+    }
+
+    const { data, error } = await supabase
+      .from(table)
+      .insert({
+        email,
+        source,
+      })
+      .select("id")
+      .single<{ id: number }>();
 
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
@@ -33,6 +55,9 @@ export async function POST(request: Request) {
     await syncMailerLiteSubscriber({
       email,
       groupId: getMailerLiteGroupId("MAILERLITE_WAITLIST_GROUP_ID"),
+      fields: {
+        waitlist_position: data.id,
+      },
     });
 
     return NextResponse.json({ ok: true });

@@ -6,7 +6,7 @@ import { Activity, Flame, Sparkles, Utensils } from "lucide-react";
 
 export function Hero() {
   return (
-    <section id="top" className="relative pt-36 pb-24 overflow-hidden">
+    <section id="top" className="relative pt-28 xl:pt-36 pb-24 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-2 gap-12 items-center">
         <div className="animate-fade-up">
           <div className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-medium text-primary mb-6">
@@ -25,6 +25,10 @@ export function Hero() {
           <div className="mt-8 max-w-md">
             <WaitlistForm />
           </div>
+          <p className="mt-2 ml-2 text-xs text-muted-foreground">
+  By joining the waitlist, you agree to receive updates about FitAura.
+  You can unsubscribe at any time.
+</p>
           <div className="mt-4 flex flex-wrap gap-3 text-sm">
             <Link
               href="#feedback"
@@ -44,7 +48,7 @@ export function Hero() {
               ))}
             </div>
             <span>
-              <span className="text-foreground font-semibold">2,847</span> athletes already joined
+              <span className="text-foreground font-semibold">2,847</span> users already joined
             </span>
           </div>
         </div>
@@ -53,9 +57,9 @@ export function Hero() {
           <div className="absolute inset-0 bg-gradient-primary opacity-20 blur-3xl rounded-full" />
           <div
             aria-label="AI Fitness Coach mobile app showing workout progress dashboard"
-            className="relative w-full max-w-md animate-float rounded-[2.5rem] border border-white/15 bg-background/80 p-4 shadow-2xl"
+            className="relative w-full max-w-md animate-float rounded-[2.5rem] border border-white/15 bg-background/80 p-3 xl:p-4 shadow-2xl"
           >
-            <div className="rounded-[2rem] border border-border bg-card p-5">
+            <div className="rounded-[2rem] border border-border bg-card p-4 xl:p-5">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs text-muted-foreground">Today</p>
@@ -66,28 +70,28 @@ export function Hero() {
                 </div>
               </div>
 
-              <div className="mt-6 rounded-2xl bg-gradient-primary p-5 text-primary-foreground shadow-glow">
+              <div className="mt-5 xl:mt-6 rounded-2xl bg-gradient-primary p-4 xl:p-5 text-primary-foreground shadow-glow">
                 <p className="text-sm font-medium opacity-85">AI recommendation</p>
-                <p className="mt-2 text-2xl font-bold">42 min workout</p>
+                <p className="mt-2 text-xl xl:text-2xl font-bold">42 min workout</p>
                 <p className="mt-1 text-sm opacity-85">Lower-body power with form coaching</p>
               </div>
 
               <div className="mt-5 grid grid-cols-2 gap-3">
                 <div className="rounded-2xl border border-border bg-background p-4">
                   <Flame className="h-5 w-5 text-secondary" />
-                  <p className="mt-3 text-2xl font-bold">620</p>
+                  <p className="mt-3 text-xl xl:text-2xl font-bold">620</p>
                   <p className="text-xs text-muted-foreground">calories</p>
                 </div>
                 <div className="rounded-2xl border border-border bg-background p-4">
                   <Utensils className="h-5 w-5 text-primary" />
-                  <p className="mt-3 text-2xl font-bold">132g</p>
+                  <p className="mt-3 text-xl xl:text-2xl font-bold">132g</p>
                   <p className="text-xs text-muted-foreground">protein goal</p>
                 </div>
               </div>
 
-              <div className="mt-5 space-y-3">
+              <div className="mt-4 xl:mt-5 space-y-2 xl:space-y-3">
                 {["Squat depth", "Recovery score", "Meal plan"].map((item, index) => (
-                  <div key={item} className="flex items-center gap-3 rounded-xl bg-muted/40 p-3">
+                  <div key={item} className="flex items-center gap-3 rounded-xl bg-muted/40 p-2.5 xl:p-3">
                     <div className="h-2 w-2 rounded-full bg-primary" />
                     <span className="flex-1 text-sm font-medium">{item}</span>
                     <span className="text-xs text-muted-foreground">{92 - index * 7}%</span>

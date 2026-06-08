@@ -3,9 +3,10 @@ import { getOptionalEnv, getRequiredEnv } from "./server-env";
 type MailerLiteSubscriber = {
   email: string;
   groupId?: string;
+  fields?: Record<string, string | number>;
 };
 
-export async function syncMailerLiteSubscriber({ email, groupId }: MailerLiteSubscriber) {
+export async function syncMailerLiteSubscriber({ email, groupId, fields }: MailerLiteSubscriber) {
   const groups = groupId ? [groupId] : undefined;
   const response = await fetch("https://connect.mailerlite.com/api/subscribers", {
     method: "POST",
@@ -17,6 +18,7 @@ export async function syncMailerLiteSubscriber({ email, groupId }: MailerLiteSub
     body: JSON.stringify({
       email,
       ...(groups ? { groups } : {}),
+      ...(fields ? { fields } : {}),
     }),
   });
 
