@@ -1,13 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useState } from "react";
 import { toast } from "sonner";
 import { Loader2, CheckCircle2 } from "lucide-react";
+import { normalizeUtmValue, type UtmParams } from "@/lib/utm";
 
 export function WaitlistForm({ source = "waitlist" }: { source?: string }) {
+  return (
+    <Suspense fallback={null}>
+      <WaitlistFormInner source={source} />
+    </Suspense>
+  );
+}
+
+function WaitlistFormInner({ source = "waitlist" }: { source?: string }) {
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const utm: UtmParams = {
+    utm_source: normalizeUtmValue(searchParams.get("utm_source")) || "direct",
+    utm_medium: normalizeUtmValue(searchParams.get("utm_medium")),
+    utm_campaign: normalizeUtmValue(searchParams.get("utm_campaign")),
+  };
 
   async function onSubmit(e: React.SubmitEvent) {
     e.preventDefault();
@@ -19,7 +35,7 @@ export function WaitlistForm({ source = "waitlist" }: { source?: string }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, source }),
+        body: JSON.stringify({ email, source, ...utm }),
       });
       const result = (await response.json()) as {
         alreadyJoined?: boolean;

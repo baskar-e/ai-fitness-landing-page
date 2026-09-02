@@ -1,6 +1,7 @@
 'use client'
 
 import { Brain, UtensilsCrossed, Flame, ScanLine, LineChart, Trophy } from "lucide-react";
+import Image from "next/image";
 // import poseImg from "@/assets/pose-correction.jpg";
 
 const features = [
@@ -66,18 +67,18 @@ export function Features() {
             </ul>
           </div>
           <div className="relative min-h-80 lg:min-h-115">
-            {/* <Image
-              src={poseImg}
+            <Image
+              src={'/pose-correction.png'}
               alt="AI pose detection overlay analyzing squat form"
               loading="lazy"
               width={1024}
               height={1024}
               className="absolute inset-0 h-full w-full object-cover"
-            /> */}
+            />
             <div className="absolute inset-0 bg-linear-to-r from-card via-transparent to-transparent lg:from-card/80" />
           </div>
         </div>
-
+  
         <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {features.map((f) => (
             <div

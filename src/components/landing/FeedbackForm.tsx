@@ -1,14 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useState } from "react";
 import { toast } from "sonner";
 import { Loader2, CheckCircle2 } from "lucide-react";
+import { normalizeUtmValue, type UtmParams } from "@/lib/utm";
 
 const goals = ["Lose weight", "Build muscle", "Improve endurance", "General health", "Athletic performance"];
 const features = ["AI workout plans", "AI meal planning", "Calorie tracking", "AI pose correction", "Progress dashboard"];
 const payOptions = ["Yes, definitely", "Maybe — depends on price", "Only the free version", "Not sure yet"];
 
 export function FeedbackForm() {
+  return (
+    <Suspense fallback={null}>
+      <FeedbackFormInner />
+    </Suspense>
+  );
+}
+
+function FeedbackFormInner() {
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
   const [form, setForm] = useState({
@@ -18,6 +29,11 @@ export function FeedbackForm() {
     most_interesting_feature: "",
     would_pay: "",
   });
+  const utm: UtmParams = {
+    utm_source: normalizeUtmValue(searchParams.get("utm_source")) || "direct",
+    utm_medium: normalizeUtmValue(searchParams.get("utm_medium")),
+    utm_campaign: normalizeUtmValue(searchParams.get("utm_campaign")),
+  };
 
   function update<K extends keyof typeof form>(k: K, v: string) {
     setForm((f) => ({ ...f, [k]: v }));
@@ -32,7 +48,7 @@ export function FeedbackForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, ...utm }),
       });
       const result = (await response.json()) as {
         alreadyJoined?: boolean;
@@ -115,9 +131,9 @@ export function FeedbackForm() {
         {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Submit & Become a Beta Tester"}
       </button>
       <p className="mt-2 text-xs text-muted-foreground text-center">
-  By joining the waitlist, you agree to receive updates about FitAura.
-  You can unsubscribe at any time.
-</p>
+        By joining the waitlist, you agree to receive updates about FitAura.
+        You can unsubscribe at any time.
+      </p>
     </form>
   );
 }

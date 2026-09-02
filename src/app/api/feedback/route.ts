@@ -9,6 +9,9 @@ type FeedbackPayload = {
   biggest_challenge?: string;
   most_interesting_feature?: string;
   would_pay?: string;
+  utm_source?: string | null;
+  utm_medium?: string | null;
+  utm_campaign?: string | null;
 };
 
 export async function POST(request: Request) {
@@ -47,6 +50,9 @@ export async function POST(request: Request) {
       biggest_challenge: cleanText(payload.biggest_challenge),
       most_interesting_feature: cleanText(payload.most_interesting_feature),
       would_pay: cleanText(payload.would_pay),
+      utm_source: cleanNullableText(payload.utm_source),
+      utm_medium: cleanNullableText(payload.utm_medium),
+      utm_campaign: cleanNullableText(payload.utm_campaign),
     });
 
     if (error) {
@@ -78,4 +84,13 @@ function normalizeEmail(email: unknown) {
 
 function cleanText(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
+}
+
+function cleanNullableText(value: unknown) {
+  if (typeof value !== "string") {
+    return null;
+  }
+
+  const normalized = value.trim();
+  return normalized ? normalized : null;
 }

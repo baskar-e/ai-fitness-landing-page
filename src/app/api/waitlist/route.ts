@@ -6,6 +6,9 @@ import { createSupabaseServerClient } from "@/lib/supabase-server";
 type WaitlistPayload = {
   email?: string;
   source?: string;
+  utm_source?: string | null;
+  utm_medium?: string | null;
+  utm_campaign?: string | null;
 };
 
 export async function POST(request: Request) {
@@ -44,6 +47,9 @@ export async function POST(request: Request) {
       .insert({
         email,
         source,
+        utm_source: cleanNullableText(payload.utm_source),
+        utm_medium: cleanNullableText(payload.utm_medium),
+        utm_campaign: cleanNullableText(payload.utm_campaign),
       })
       .select("id")
       .single<{ id: number }>();
@@ -76,4 +82,13 @@ function normalizeEmail(email: unknown) {
 
   const normalized = email.trim().toLowerCase();
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized) ? normalized : "";
+}
+
+function cleanNullableText(value: unknown) {
+  if (typeof value !== "string") {
+    return null;
+  }
+
+  const normalized = value.trim();
+  return normalized ? normalized : null;
 }

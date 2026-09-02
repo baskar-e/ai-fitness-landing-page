@@ -6,26 +6,38 @@ import Link from "next/link";
 const tiers = [
   {
     name: "Free",
-    price: "$0",
+    price: "₹0",
     desc: "Get started with the essentials.",
     features: ["Basic AI workout plans", "Calorie tracking", "Progress dashboard", "Streaks & badges"],
     cta: "Join waitlist",
     highlighted: false,
   },
   {
-    name: "Premium AI Coach",
-    price: "$14.99",
+    name: "Pro",
+    price: "₹149",
     suffix: "/ mo",
-    desc: "The full AI coach experience.",
+    desc: "Train smarter with AI.",
     features: [
+      "AI coach",
+      "Unlimited AI workout plans",
       "Adaptive AI workouts",
       "AI meal planning",
-      "AI pose correction",
-      "Advanced analytics & insights",
-      "Priority support",
     ],
     cta: "Get early-bird pricing",
     highlighted: true,
+    tag: "Most popular"
+  },
+  {
+    name: "Elite",
+    desc: "Premium features coming soon.",
+    features: [
+      "AI pose correction",
+      "Voice-guided workout",
+      "Advanced analytics & insights",
+      "Priority support",
+    ],
+    highlighted: true,
+    tag: "Coming soon"
   },
 ];
 
@@ -38,22 +50,22 @@ export function Pricing() {
           <h2 className="mt-3 text-4xl md:text-5xl font-bold">Simple pricing. Real value.</h2>
           <p className="mt-3 text-muted-foreground">Lock in early-bird rates by joining the waitlist now.</p>
         </div>
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="grid md:grid-cols-3 gap-5">
           {tiers.map((t) => (
             <div
               key={t.name}
               className={
-                "flex flex-col rounded-3xl p-8 border " +
+                "flex flex-col rounded-3xl p-8 border bg-gradient-card " +
                 (t.highlighted
-                  ? "bg-gradient-card border-primary/50 shadow-glow"
-                  : "bg-gradient-card border-border")
+                  ? "border-primary/50 shadow-glow"
+                  : "border-border")
               }
             >
               <div className="flex items-center justify-between">
                 <h3 className="font-display text-2xl font-bold">{t.name}</h3>
-                {t.highlighted && (
+                {t.tag && (
                   <span className="text-xs font-semibold bg-primary/15 text-primary rounded-full px-3 py-1">
-                    Most popular
+                    {t.tag}
                   </span>
                 )}
               </div>
@@ -70,17 +82,19 @@ export function Pricing() {
                   </li>
                 ))}
               </ul>
-              <Link
-                href="#waitlist"
-                className={
-                  "mt-auto inline-flex w-full justify-center rounded-xl px-5 py-3 font-semibold transition " +
-                  (t.highlighted
-                    ? "bg-gradient-primary text-primary-foreground shadow-glow hover:opacity-90"
-                    : "glass bg-[oklch(0.22_0.018_245/0.9)]! hover:border-primary")
-                }
-              >
-                {t.cta}
-              </Link>
+              {t.cta &&
+                <Link
+                  href="#waitlist"
+                  className={
+                    "mt-auto inline-flex w-full justify-center rounded-xl px-5 py-3 font-semibold transition " +
+                    (t.highlighted
+                      ? "bg-gradient-primary text-primary-foreground shadow-glow hover:opacity-90"
+                      : "glass bg-[oklch(0.22_0.018_245/0.9)]! hover:border-primary")
+                  }
+                >
+                  {t.cta}
+                </Link>
+              }
             </div>
           ))}
         </div>
